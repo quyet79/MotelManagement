@@ -1,13 +1,13 @@
 ﻿USE MASTER
 GO
 
-IF OBJECT_ID('HotelManagement') IS NOT NULL
-	DROP DATABASE HotelManagement
+IF OBJECT_ID('MotelManagement') IS NOT NULL
+	DROP DATABASE MotelManagement
 GO
-CREATE DATABASE HotelManagement
+CREATE DATABASE MotelManagement
 GO
 
-USE HotelManagement
+USE MotelManagement
 GO
 
 ----------------------------Department
@@ -16,17 +16,17 @@ IF OBJECT_ID('Department') IS NOT NULL
 GO
 CREATE TABLE Department
 (
-	Id		varchar(10) NOT NULL PRIMARY KEY,
+	Id		int identity(1,1) NOT NULL PRIMARY KEY,
 	Name	nvarchar(50) NOT NULL
 )
 GO
 
 DELETE FROM Department
 go
-INSERT Department VALUES ('Mng', 'Manager')
-INSERT Department VALUES ('Act', 'Accountant')
-INSERT Department VALUES ('Dpt', 'Departmantal Staff')
-INSERT Department VALUES ('Rct', 'Receptionist')
+INSERT Department VALUES ('Manager')
+INSERT Department VALUES ('Accountant')
+INSERT Department VALUES ('Departmantal Staff')
+INSERT Department VALUES ('Receptionist')
 
 SELECT * FROM Department
 GO
@@ -46,25 +46,25 @@ CREATE TABLE Staff
 	Phone			VARCHAR(20) NOT NULL,
 	Email			VARCHAR(50) NOT NULL,
 	Avatar			VARCHAR(50),
-	IdDepartment	VARCHAR(10) NOT NULL,
+	DepartmentId	int NOT NULL,
 	unique(Phone),
 	unique(Email),
-	foreign key (IdDepartment) references department(id) on update cascade
+	foreign key (DepartmentId) references department(id) on update cascade
 )
 GO
 
 DELETE FROM Staff
-INSERT Staff VALUES ('PH01', N'Nguyễn Nhật Hùng', 'hungnn', '1998-03-05', 1, N'Hà Nội', '0984111111', 'hungnnph09719@fpt.edu.vn', DEFAULT, 'Mng')
-INSERT Staff VALUES ('PH02', N'Hứa Mạnh Hùng', 'hunghm', '2000-03-05', 1, N'Hà Nội', '0984111112', 'hunghmph09808@fpt.edu.vn', DEFAULT, 'Mng')
-INSERT Staff VALUES ('PH03', N'Nguyễn Hữu Quyết', 'quyetnh', '2001-03-05', 1, N'Hà Nội', '0984111113', 'quyetnhph12037@fpt.edu.vn', DEFAULT, 'Rct')
+INSERT Staff VALUES ('PH01', N'Nguyễn Nhật Hùng', 'hungnn', '1998-03-05', 1, N'Hà Nội', '0984111111', 'hungnnph09719@fpt.edu.vn', DEFAULT, 1)
+INSERT Staff VALUES ('PH02', N'Hứa Mạnh Hùng', 'hunghm', '2000-03-05', 1, N'Hà Nội', '0984111112', 'hunghmph09808@fpt.edu.vn', DEFAULT, 1)
+INSERT Staff VALUES ('PH03', N'Nguyễn Hữu Quyết', 'quyetnh', '2001-03-05', 1, N'Hà Nội', '0984111113', 'quyetnhph12037@fpt.edu.vn', DEFAULT, 3)
 
-INSERT Staff VALUES ('PH04', N'Nguyễn Quốc Lập', 'lapnq', '2002-11-12', 1, N'Hà Nội', '0984111114', 'lapnqph14889@fpt.edu.vn', DEFAULT, 'Act')
-INSERT Staff VALUES ('PH05', N'Hoàng Tấn Lộc', 'locht', '2001-08-13', 1, N'Hà Nội', '0984111115', 'lochtph15557@fpt.edu.vn', DEFAULT, 'Act')
-INSERT Staff VALUES ('PH06', N'Trương Tấn Thành', 'thanhtt', '2000-05-09', 1, N'Hà Nội', '0984111116', 'thanhttph15752@fpt.edu.vn', DEFAULT, 'Rct')
-INSERT Staff VALUES ('PH07', N'Ngô Duy Nam ', 'namnd', '1999-06-05', 1, N'Hà Nội', '0984111117', 'namndph15819 @fpt.edu.vn', DEFAULT, 'Dpt')
-INSERT Staff VALUES ('PH08', N'Bùi Minh Hiển ', 'hienbm', '2001-12-05', 1, N'Hà Nội', '0984111118', 'hienbmph15983@fpt.edu.vn', DEFAULT, 'Dpt')
-INSERT Staff VALUES ('PH09', N'Đỗ Thị Huế ', 'huedt', '2001-03-23', 0, N'Hà Nội', '0984111119', 'huedtph16848@fpt.edu.vn', DEFAULT, 'Rct')
-INSERT Staff VALUES ('PH10', N'Phạm Anh Tú ', 'tupa', '2001-10-05', 1, N'Hà Nội', '0984111120', 'tupaph17044@fpt.edu.vn', DEFAULT, 'Act')
+INSERT Staff VALUES ('PH04', N'Nguyễn Quốc Lập', 'lapnq', '2002-11-12', 1, N'Hà Nội', '0984111114', 'lapnqph14889@fpt.edu.vn', DEFAULT, 4)
+INSERT Staff VALUES ('PH05', N'Hoàng Tấn Lộc', 'locht', '2001-08-13', 1, N'Hà Nội', '0984111115', 'lochtph15557@fpt.edu.vn', DEFAULT, 2)
+INSERT Staff VALUES ('PH06', N'Trương Tấn Thành', 'thanhtt', '2000-05-09', 1, N'Hà Nội', '0984111116', 'thanhttph15752@fpt.edu.vn', DEFAULT, 4)
+INSERT Staff VALUES ('PH07', N'Ngô Duy Nam ', 'namnd', '1999-06-05', 1, N'Hà Nội', '0984111117', 'namndph15819 @fpt.edu.vn', DEFAULT, 2)
+INSERT Staff VALUES ('PH08', N'Bùi Minh Hiển ', 'hienbm', '2001-12-05', 1, N'Hà Nội', '0984111118', 'hienbmph15983@fpt.edu.vn', DEFAULT, 4)
+INSERT Staff VALUES ('PH09', N'Đỗ Thị Huế ', 'huedt', '2001-03-23', 0, N'Hà Nội', '0984111119', 'huedtph16848@fpt.edu.vn', DEFAULT, 4)
+INSERT Staff VALUES ('PH10', N'Phạm Anh Tú ', 'tupa', '2001-10-05', 1, N'Hà Nội', '0984111120', 'tupaph17044@fpt.edu.vn', DEFAULT, 3)
 
 SELECT * FROM Staff
 GO
@@ -77,9 +77,9 @@ CREATE TABLE Verify
 (
 	Id			INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	Code		VARCHAR(20) NOT NULL,
-	IdStaff		VARCHAR(10) NOT NULL,
+	StaffId		VARCHAR(10) NOT NULL,
 	CreateAt	DATETIME NOT NULL DEFAULT GETDATE()
-	FOREIGN KEY (IdStaff) REFERENCES Staff(Id) ON UPDATE CASCADE
+	FOREIGN KEY (StaffId) REFERENCES Staff(Id) ON UPDATE CASCADE
 )
 GO
 DELETE FROM Verify
@@ -95,6 +95,7 @@ CREATE TABLE ServiceType
 	Name			NVARCHAR(50) NOT NULL,
 )
 GO
+
 DELETE FROM ServiceType
 DBCC CHECKIDENT ('ServiceType', RESEED, 0)
 go
@@ -107,8 +108,6 @@ insert ServiceType values ('Sport')
 
 select * from ServiceType
 
-
-
 --------------------------------------------Service
 IF OBJECT_ID('Service') IS NOT NULL
 	DROP TABLE Service
@@ -120,8 +119,8 @@ CREATE TABLE Service
 	Price			MONEY NOT NULL CHECK(Price >= 0),
 	Describe		NVARCHAR(1000),
 	Status			BIT NOT NULL DEFAULT 1,
-	IdType			int not null,
-	foreign key (IdType) references ServiceType(id) on update cascade
+	ServiceTypeId	int not null,
+	foreign key (ServiceTypeId) references ServiceType(id) on update cascade
 )
 GO
 
@@ -330,12 +329,12 @@ GO
 CREATE TABLE Price
 (
 	ID				INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	IdRoomType		int NOT NULL,
-	IdPriceType		INT NOT NULL,
+	RoomTypeId		int NOT NULL,
+	PriceTypeId		INT NOT NULL,
 	PriceValue		MONEY NOT NULL CHECK(PriceValue > 0),
-	UNIQUE(IdRoomType, IdPriceType),
-	FOREIGN KEY (IdRoomType) REFERENCES RoomType(Id),
-	FOREIGN KEY (IdPriceType) REFERENCES PriceType(Id)
+	UNIQUE(RoomTypeId, PriceTypeId),
+	FOREIGN KEY (RoomTypeId) REFERENCES RoomType(Id),
+	FOREIGN KEY (PriceTypeId) REFERENCES PriceType(Id)
 )
 GO
 
@@ -457,9 +456,9 @@ CREATE TABLE Invoice
 	PriceTypeId		INT NOT NULL,
 	CustomerId		INT NOT NULL,
 	StaffId			VARCHAR(10) NOT NULL
-	FOREIGN KEY (MALG) REFERENCES LOAIGIA(MALG),
-	FOREIGN KEY (MAKH) REFERENCES KHACHHANG(MAKH),
-	FOREIGN KEY (MANV) REFERENCES NHANVIEN(MANV)
+	FOREIGN KEY (PriceTypeId) REFERENCES PriceType(Id),
+	FOREIGN KEY (CustomerId) REFERENCES Customer(Id),
+	FOREIGN KEY (StaffId) REFERENCES Staff(Id)
 )
 GO
 
@@ -467,39 +466,39 @@ DELETE FROM Invoice
 DBCC CHECKIDENT ('Invoice', RESEED, 0)
 
 ----------------------------------------HDDICHVU
-IF OBJECT_ID('HDDICHVU') IS NOT NULL
-	DROP TABLE HDDICHVU
+IF OBJECT_ID('ServiceInvoice') IS NOT NULL
+	DROP TABLE ServiceInvoice
 GO
-CREATE TABLE HDDICHVU
+CREATE TABLE ServiceInvoice
 (
-	ID			INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	MAHD		INT NOT NULL,
-	MADV		INT NOT NULL,
-	SOLUONG		INT NOT NULL CHECK(SOLUONG > 0)
-	UNIQUE(MAHD, MADV),
-	FOREIGN KEY (MAHD) REFERENCES HOADON(MAHD),
-	FOREIGN KEY (MADV) REFERENCES DICHVU(MADV)	
+	ID				INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	InvoiceId		INT NOT NULL,
+	ServiceId		INT NOT NULL,
+	Amount			INT NOT NULL CHECK(Amount > 0)
+	UNIQUE(InvoiceId, ServiceId),
+	FOREIGN KEY (InvoiceId) REFERENCES Invoice(Id),
+	FOREIGN KEY (ServiceId) REFERENCES Service(Id)	
 )
 GO
-DELETE FROM HDDICHVU
-DBCC CHECKIDENT ('HDDICHVU', RESEED, 0)
+DELETE FROM ServiceInvoice
+DBCC CHECKIDENT ('ServiceInvoice', RESEED, 0)
 
 --------------------------------------------HDPHONG
-IF OBJECT_ID('HDPHONG') IS NOT NULL
-	DROP TABLE HDPHONG
+IF OBJECT_ID('RoomInvoice') IS NOT NULL
+	DROP TABLE RoomInvoice
 GO
-CREATE TABLE HDPHONG
+CREATE TABLE RoomInvoice
 (
-	ID			INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	MAHD		INT NOT NULL,
-	SOPHONG		VARCHAR(10) NOT NULL
-	UNIQUE(MAHD, SOPHONG),
-	FOREIGN KEY (MAHD) REFERENCES HOADON(MAHD),
-	FOREIGN KEY (SOPHONG) REFERENCES PHONG(SOPHONG)
+	ID				INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	InvoiceId		INT NOT NULL,
+	RoomNumber		VARCHAR(10) NOT NULL
+	UNIQUE(InvoiceId, RoomNumber),
+	FOREIGN KEY (InvoiceId) REFERENCES Invoice(Id),
+	FOREIGN KEY (RoomNumber) REFERENCES Room(Number)
 )
 GO
-DELETE FROM HDPHONG
-DBCC CHECKIDENT ('HDPHONG', RESEED, 0)
+DELETE FROM RoomInvoice
+DBCC CHECKIDENT ('RoomInvoice', RESEED, 0)
 
 -----------------------------------------sp_thanhtoan
 if OBJECT_ID('sp_thanhtoanhd') is not null
